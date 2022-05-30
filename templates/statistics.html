@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Statistics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'padded.png' %}">
+    <link rel="stylesheet" href="{% static 'bnav.css' %}">
+    <link rel="stylesheet" href="{% static 'statistics.css' %}">
+     <link rel="stylesheet" href="{% static 'form.css' %}">
+    <script src="{% static 'statistics.js' %}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body onload="changeTable()">
+
+<nav style="position: relative; z-index: 10">
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+    <a class="home" href="{% url 'index' %}">
+      <label style="padding-left: 50px;">
+      <img src="{% static 'padded.png' %}" height="75" width="77">
+      </label>
+    </a>
+      <ul>
+        <li><a class="active" href="{% url 'statistics' %}" >Statistics</a></li>
+          <li><a href="{% url 'news' %}">News</a></li>
+          <li><a href="{% url 'lstm' %}">LSTM</a></li>
+          <li><a href="{% url 'technical' %}">Technical</a></li>
+
+      </ul>
+</nav>
+
+
+<!--- FORM TO SELECT THE ACCURACY DURATION TYPE --->
+
+<div class="container">
+  <form >
+    <div class="row">
+      <div class="col-25">
+        <label for="accuracyType">Accuracy Duration</label>
+      </div>
+      <div class="col-75">
+        <select id="accuracyType" name="accuracyType" onchange="changeTable()">
+          <option value="maxAcc" selected="selected">Maximum Duration</option>
+          <option value="oneWeekAcc">1 Week Duration</option>
+          <option value="oneMonthAcc">1 Month Duration</option>
+          <option value="sixMonthAcc">6 Month Duration</option>
+         <option value="oneYearAcc">1 Year Duration</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<!-- ACCURACY TABLE FOR MAXIMUM DURATION--->
+<div id="maxAccTable">
+<h2 style="text-align: center; margin-top: 30px">ACCURACY TABLE FOR MAXIMUM DURATION</h2>
+
+<table id="accuracy">
+  <tr>
+    <th>s.no</th>
+    <th>Model</th>
+    <th>Accuracy</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>LSTM</td>
+    <td>{{ accuracy.LSTM }}</td>
+  </tr>
+    <tr>
+    <td>2</td>
+    <td>LSTM with Interest Rate</td>
+    <td>{{ accuracy.LSTMWITHINTERESTRATE }}</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>LSTM with News</td>
+    <td>{{ accuracy.LSTMWITHNEWS }}</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>LSTM with Crude</td>
+    <td>{{ accuracy.LSTMWITHCRUDE }}</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>Weighted LSTM</td>
+    <td>{{ accuracy.WEIGHTEDLSTM }}</td>
+  </tr>
+
+</table>
+<br>
+</div>
+
+<!-- ACCURACY TABLE FOR 1 WEEK DURATION--->
+
+<div id="oneWeekAccTable">
+<h2 style="text-align: center; margin-top: 30px">ACCURACY TABLE FOR 1 WEEK</h2>
+
+<table id="accuracy">
+  <tr>
+    <th>s.no</th>
+    <th>Model</th>
+    <th>Accuracy</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>LSTM</td>
+    <td>{{ accuracy.LSTM1 }}</td>
+  </tr>
+    <tr>
+    <td>2</td>
+    <td>LSTM with Interest Rate</td>
+    <td>{{ accuracy.LSTMWITHINTERESTRATE1 }}</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>LSTM with News</td>
+    <td>{{ accuracy.LSTMWITHNEWS1 }}</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>LSTM with Crude</td>
+    <td>{{ accuracy.LSTMWITHCRUDE1 }}</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>Weighted LSTM</td>
+    <td>{{ accuracy.WEIGHTEDLSTM1 }}</td>
+  </tr>
+
+</table>
+<br>
+</div>
+
+<!-- ACCURACY TABLE FOR 1 MONTH DURATION--->
+
+<div id="oneMonthAccTable">
+<h2 style="text-align: center; margin-top: 30px">ACCURACY TABLE FOR 1 MONTH</h2>
+
+<table id="accuracy">
+  <tr>
+    <th>s.no</th>
+    <th>Model</th>
+    <th>Accuracy</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>LSTM</td>
+    <td>{{ accuracy.LSTM2 }}</td>
+  </tr>
+    <tr>
+    <td>2</td>
+    <td>LSTM with Interest Rate</td>
+    <td>{{ accuracy.LSTMWITHINTERESTRATE2 }}</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>LSTM with News</td>
+    <td>{{ accuracy.LSTMWITHNEWS2 }}</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>LSTM with Crude</td>
+    <td>{{ accuracy.LSTMWITHCRUDE2 }}</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>Weighted LSTM</td>
+    <td>{{ accuracy.WEIGHTEDLSTM2 }}</td>
+  </tr>
+
+</table>
+<br>
+</div>
+
+<!-- ACCURACY TABLE FOR 6 MONTH DURATION--->
+
+<div id="sixMonthAccTable">
+<h2 style="text-align: center; margin-top: 30px">ACCURACY TABLE FOR 6 MONTH</h2>
+
+<table id="accuracy">
+  <tr>
+    <th>s.no</th>
+    <th>Model</th>
+    <th>Accuracy</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>LSTM</td>
+    <td>{{ accuracy.LSTM3 }}</td>
+  </tr>
+    <tr>
+    <td>2</td>
+    <td>LSTM with Interest Rate</td>
+    <td>{{ accuracy.LSTMWITHINTERESTRATE3 }}</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>LSTM with News</td>
+    <td>{{ accuracy.LSTMWITHNEWS3 }}</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>LSTM with Crude</td>
+    <td>{{ accuracy.LSTMWITHCRUDE3 }}</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>Weighted LSTM</td>
+    <td>{{ accuracy.WEIGHTEDLSTM3 }}</td>
+  </tr>
+
+</table>
+<br>
+</div>
+
+<!-- ACCURACY TABLE FOR 1 YEAR DURATION--->
+
+<div id="oneYearAccTable">
+<h2 style="text-align: center; margin-top: 30px">ACCURACY TABLE FOR 1 YEAR</h2>
+
+<table id="accuracy">
+  <tr>
+    <th>s.no</th>
+    <th>Model</th>
+    <th>Accuracy</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>LSTM</td>
+    <td>{{ accuracy.LSTM4 }}</td>
+  </tr>
+    <tr>
+    <td>2</td>
+    <td>LSTM with Interest Rate</td>
+    <td>{{ accuracy.LSTMWITHINTERESTRATE4 }}</td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>LSTM with News</td>
+    <td>{{ accuracy.LSTMWITHNEWS4 }}</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>LSTM with Crude</td>
+    <td>{{ accuracy.LSTMWITHCRUDE4 }}</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>Weighted LSTM</td>
+    <td>{{ accuracy.WEIGHTEDLSTM4 }}</td>
+  </tr>
+
+</table>
+<br>
+</div>
+<br>
+<br>
+
+
+</body>

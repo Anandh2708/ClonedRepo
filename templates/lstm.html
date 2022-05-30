@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>lstm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'padded.png' %}">
+    <link rel="stylesheet" href="{% static 'bnav.css' %}">
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+     <script src="{% static 'nform.js' %}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!---->
+
+</head>
+<body onload="Sgraph()">
+
+<nav style="position: relative; z-index: 10">
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+    <a class="home" href="{% url 'index' %}">
+      <label style="padding-left: 50px;">
+      <img src="{% static 'padded.png' %}" height="75" width="77">
+      </label>
+    </a>
+      <ul>
+        <li><a  href="{% url 'statistics' %}" >Statistics</a></li>
+          <li><a href="{% url 'news' %}">News</a></li>
+          <li><a class="active" href="{% url 'lstm' %}">LSTM</a></li>
+          <li><a href="{% url 'technical' %}">Technical</a></li>
+
+      </ul>
+</nav>
+
+<!--- FORM TO SELECT THE GRAPH TYPE --->
+
+<div class="container">
+  <form >
+    <div class="row">
+      <div class="col-25">
+        <label for="predictionType">Prediction Type</label>
+      </div>
+      <div class="col-75">
+        <select id="predictionType" name="predictionType"  onchange="Sgraph()">
+          <option value="regularLSTM" selected="selected">Regular LSTM</option>
+          <option value="crudeLSTM">LSTM with Crude Oil</option>
+          <option value="interestLSTM">LSTM with Interest Rate</option>
+          <option value="hybridLSTM">LSTM with News</option>
+         <option value="weightedLSTM">Hybrid LSTM</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<!---GRAPH FOR LSTM--->
+
+
+
+<div id = "regular" style="display: block" >
+    {{ res_graph.lstm_graph|safe }}
+    <h2 style="margin-left: 60px;">Predicted Next Day's Price : {{ res_graph.lstm_value }} </h2>
+    <h2 style="margin-left: 60px;margin-bottom: 50px">Predicted Percent : {{  res_graph.lstm_percent }}%</h2>
+</div>
+
+<div id = "crude" style="display: block">
+    {{ res_graph.lstm_crude_graph|safe }}
+    <h2 style="margin-left: 60px">Predicted Next Day's Price : {{ res_graph.lstm_crude_value }} </h2>
+    <h2 style="margin-left: 60px;margin-bottom: 50px">Predicted Percent : {{  res_graph.lstm_crude_percent }}%</h2>
+</div>
+
+<div id = "interest" style="display: block">
+    {{ res_graph.lstm_interest_graph|safe }}
+    <h2 style="margin-left: 60px">Predicted Next Day's Price : {{ res_graph.lstm_interest_value }} </h2>
+    <h2 style="margin-left: 60px;margin-bottom: 50px">Predicted Percent : {{  res_graph.lstm_interest_percent }}%</h2>
+</div>
+
+<div id = "hybrid" style="display: block">
+    {{ res_graph.lstm_news_graph|safe }}
+    <h2 style="margin-left: 60px">Predicted Next Day's Price : {{ res_graph.lstm_news_value }} </h2>
+    <h2 style="margin-left: 60px;margin-bottom: 50px">Predicted Percent : {{  res_graph.lstm_news_percent }}%</h2>
+</div>
+
+<div id = "weighted" style="display: block">
+    {{ res_graph.weighted_lstm_graph|safe }}
+    <h2 style="margin-left: 60px">Predicted Next Day's Price : {{ res_graph.lstm_hybrid_value }} </h2>
+    <h2 style="margin-left: 60px;margin-bottom: 50px">Predicted Percent : {{  res_graph.lstm_hybrid_percent }}%</h2>
+</div>
+
+
+
+</body>

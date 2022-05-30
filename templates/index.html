@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Stock Overflow</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="{% static 'index.js' %}"></script>
+    <link rel="icon" href="{% static 'padded.png' %}">
+    <link rel="stylesheet" href="{% static 'bnav.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body onload="javascript:colourChange({{ Nifty.HybridPercent }})">
+
+<nav style="position: relative; z-index: 10">
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+    <a class="home" style="" href="{% url 'index' %}">
+      <label style="padding-left: 50px;">
+      <img src="{% static 'padded.png' %}" height="75" width="77">
+      </label>
+    </a>
+      <ul>
+        <li ><a href="{% url 'statistics' %}" >Statistics</a></li>
+          <li><a href="{% url 'news' %}">News</a></li>
+          <li><a href="{% url 'lstm' %}">LSTM</a></li>
+          <li><a href="{% url 'technical' %}">Technical</a></li>
+
+      </ul>
+    </nav>
+
+
+<div id="nifty" style="margin-top: 200px">
+<h2 style="text-align: center">Predicted Price of Nifty 50:</h2>
+<h1 style="font-size: 100px; text-align: center;" > {{ Nifty.HybridPrice }}</h1>
+<h6 style="font-size: 25px; text-align: center;">
+    {% if Nifty.HybridPercent > 0 %}
+       (+{{ Nifty.HybridPercent }}%)
+    {% else %}
+       ({{ Nifty.HybridPercent }}%)
+    {% endif %}
+</h6>
+</div>
+
+
+
+</body>

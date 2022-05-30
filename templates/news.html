@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>news</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'padded.png' %}">
+    <link rel="stylesheet" href="{% static 'bnav.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<nav style="position: relative; z-index: 10">
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+    <a class="home" href="{% url 'index' %}">
+      <label style="padding-left: 50px;">
+      <img src="{% static 'padded.png' %}" height="75" width="77">
+      </label>
+    </a>
+      <ul>
+        <li><a  href="{% url 'statistics' %}" >Statistics</a></li>
+          <li><a class="active" href="{% url 'news' %}">News</a></li>
+          <li><a href="{% url 'lstm' %}">LSTM</a></li>
+          <li><a  href="{% url 'technical' %}">Technical</a></li>
+
+      </ul>
+</nav>
+
+
+<!--- Words count graph--->
+
+{{ news_graph|safe }}
+
+</body>
